@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "depart_date": { "type": "string", "format": "date" },
+          "origin": { "type": "string" },
+          "destination": { "type": "string" },
+          "gate": { "type": "string" },
+          "return_date": { "type": ["string", "null"], "format": "date" },
+          "found_at": { "type": "string", "format": "date-time" },
+          "trip_class": { "type": "integer" },
+          "value": { "type": "number" },
+          "number_of_changes": { "type": "integer" },
+          "duration": { "type": "integer" },
+          "distance": { "type": "integer" },
+          "show_to_affiliates": { "type": "boolean" },
+          "actual": { "type": "boolean" }
+        },
+        "required": [
+          "depart_date",
+          "origin",
+          "destination",
+          "gate",
+          "return_date",
+          "found_at",
+          "trip_class",
+          "value",
+          "number_of_changes",
+          "duration",
+          "distance",
+          "show_to_affiliates",
+          "actual"
+        ]
+      }
+    },
+    "currency": { "type": "string" },
+    "success": { "type": "boolean" }
+  },
+  "required": ["data", "currency", "success"]
+}

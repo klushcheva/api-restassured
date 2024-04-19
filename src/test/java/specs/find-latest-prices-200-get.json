@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "success": { "type": "boolean" },
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "show_to_affiliates": { "type": "boolean" },
+          "origin": { "type": "string" },
+          "destination": { "type": "string" },
+          "depart_date": { "type": "string", "format": "date" },
+          "return_date": { "type": "string", "format": "date" },
+          "number_of_changes": { "type": "integer" },
+          "value": { "type": "integer" },
+          "found_at": { "type": "string", "format": "date-time" },
+          "distance": { "type": "integer" },
+          "actual": { "type": "boolean" }
+        },
+        "required": [
+          "show_to_affiliates",
+          "origin",
+          "destination",
+          "depart_date",
+          "return_date",
+          "number_of_changes",
+          "value",
+          "found_at",
+          "distance",
+          "actual"
+        ]
+      }
+    }
+  },
+  "required": ["success", "data"]
+}
