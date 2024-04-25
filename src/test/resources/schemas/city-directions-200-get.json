@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "success": { "type": "boolean" },
+    "data": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "origin": { "type": "string" },
+          "destination": { "type": "string" },
+          "price": { "type": "integer" },
+          "transfers": { "type": "integer" },
+          "airline": { "type": "string" },
+          "flight_number": { "type": "integer" },
+          "departure_at": { "type": "string", "format": "date-time" },
+          "return_at": { "type": "string", "format": "date-time" },
+          "expires_at": { "type": "string", "format": "date-time" }
+        },
+        "required": [
+          "origin",
+          "destination",
+          "price",
+          "transfers",
+          "airline",
+          "flight_number",
+          "departure_at",
+          "return_at",
+          "expires_at"
+        ]
+      }
+    },
+    "error": { "type": ["string", "null"] },
+    "currency": { "type": "string" }
+  },
+  "required": ["success", "data", "currency"]
+}

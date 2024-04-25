@@ -17,19 +17,20 @@ public class PlacesMatrixResponseModel {
         private boolean actual;
         @JsonProperty("show_to_affiliates")
         private Boolean showToAffiliates;
-        private double value;
+        private double price;
         private int distance;
         @JsonProperty("number_of_changes")
         private int numberOfChanges;
         @JsonProperty("trip_class")
         private int tripClass;
-        private String origin, gate, duration, destination;
+        private String origin, gate, duration, destination, link, transfers;
         @JsonProperty("found_at")
         private String foundAt;
+        @JsonProperty("main_airline")
+        private String mainAirline;
         @JsonProperty("depart_date")
         private String departDate;
         @JsonProperty("return_date")
         private String returnDate;
     }
-
 }

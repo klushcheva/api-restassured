@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "error": { "type": "string" },
+    "data": { "type": "null" },
+    "status": { "type": "integer" },
+    "success": { "type": "boolean" }
+  },
+  "required": ["error", "data", "status", "success"]
+}

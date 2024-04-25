@@ -1,1 +1,1 @@
-# api-restassured
+# Автоматизация тестов API Aviasales flight data
