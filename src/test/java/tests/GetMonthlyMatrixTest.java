@@ -22,6 +22,12 @@ import static specs.FlightMatrixSpec.getFlightMatrix200ResponseSpec;
 import static specs.GenericErrorSpec.getGenericErrorSpec;
 
 public class GetMonthlyMatrixTest extends BaseAPITest {
+    private final String BAD_CUR = "zzz";
+    private final String CUR_NUM = "1234";
+    private final String BAD_LOCATION = "TNQL";
+    private final Integer LONG_DURATION = 31;
+    private final Integer SHORT_DURATION = -1;
+
     @ParameterizedTest
     @CsvSource({
             "RUB, MOW, LED, 1",
@@ -70,7 +76,7 @@ public class GetMonthlyMatrixTest extends BaseAPITest {
         ErrorResponseModel getErrorResponseModel =
                 step("Запрос на получение информации о пользователе", () ->
                         given()
-                                .param("currency", "ZZZ")
+                                .param("currency", BAD_CUR)
                                 .param("origin", "MOW")
                                 .param("destination","LED")
                                 .param("month", get10WeeksFutureDate())
@@ -85,7 +91,7 @@ public class GetMonthlyMatrixTest extends BaseAPITest {
 
         step("Проверка ответа", () -> {
             assertFalse(getErrorResponseModel.isSuccess());
-            assertEquals(errorBadCurrency01 + "zzz" + errorBadCurrency02 + "zzz", getErrorResponseModel.getError());
+            assertEquals(errorBadCurrency01 + BAD_CUR + errorBadCurrency02 + BAD_CUR, getErrorResponseModel.getError());
         });
     }
 
@@ -96,7 +102,7 @@ public class GetMonthlyMatrixTest extends BaseAPITest {
         ErrorResponseModel getErrorResponseModel =
                 step("Запрос на получение информации о пользователе", () ->
                         given()
-                                .param("currency", "1234")
+                                .param("currency", CUR_NUM)
                                 .param("origin", "MOW")
                                 .param("destination","LED")
                                 .param("month", get10WeeksFutureDate())
@@ -123,7 +129,7 @@ public class GetMonthlyMatrixTest extends BaseAPITest {
                 step("Запрос на получение информации о пользователе", () ->
                         given()
                                 .param("currency", "RUB")
-                                .param("origin", "TNQL")
+                                .param("origin", BAD_LOCATION)
                                 .param("destination","LED")
                                 .param("month", get10WeeksFutureDate())
                                 .param("limit", 5)
@@ -149,7 +155,7 @@ public class GetMonthlyMatrixTest extends BaseAPITest {
                         given()
                                 .param("currency", "RUB")
                                 .param("origin", "MOW")
-                                .param("destination","CIEM")
+                                .param("destination", BAD_LOCATION)
                                 .param("month", get10WeeksFutureDate())
                                 .param("limit", 5)
                                 .param("token", token)
@@ -176,7 +182,7 @@ public class GetMonthlyMatrixTest extends BaseAPITest {
                                 .param("origin", "MOW")
                                 .param("destination","LED")
                                 .param("month", get10WeeksFutureDate())
-                                .param("trip_duration", 31)
+                                .param("trip_duration", LONG_DURATION)
                                 .param("token", token)
                         .when()
                                 .get(v2PricesMonthMatrix)
@@ -202,7 +208,7 @@ public class GetMonthlyMatrixTest extends BaseAPITest {
                                 .param("origin", "MOW")
                                 .param("destination","LED")
                                 .param("month", get10WeeksFutureDate())
-                                .param("trip_duration", -2)
+                                .param("trip_duration", SHORT_DURATION)
                                 .param("token", token)
                                 .when()
                                 .get(v2PricesMonthMatrix)

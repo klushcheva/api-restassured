@@ -18,6 +18,8 @@ import static specs.CityDirectionsSpec.getCityDirections200ResponseSpec;
 import static specs.GenericErrorSpec.getGenericErrorSpec;
 
 public class GetCityDirectionsTest extends BaseAPITest{
+
+    private final String BAD_PARAMETER = "123";
     @ParameterizedTest
     @CsvSource({
             "RUB, MOW",
@@ -66,7 +68,7 @@ public class GetCityDirectionsTest extends BaseAPITest{
          ErrorResponseModel getErrorResponseModel =
                 step("Получение информации о билетах", () ->
                     given()
-                        .param("currency", "123")
+                        .param("currency", BAD_PARAMETER)
                         .param("token", token)
                     .when()
                         .get(v1CityDirections)
@@ -77,7 +79,7 @@ public class GetCityDirectionsTest extends BaseAPITest{
 
              step("Проверка ответа", () -> {
                  assertFalse(getErrorResponseModel.isSuccess());
-                 assertEquals(errorCurrencyCode01 + "123" + errorCurrencyCode02 + "123", getErrorResponseModel.getError());
+                 assertEquals(errorCurrencyCode01 + BAD_PARAMETER + errorCurrencyCode02 + BAD_PARAMETER, getErrorResponseModel.getError());
              });
          }
         @Test
@@ -87,7 +89,7 @@ public class GetCityDirectionsTest extends BaseAPITest{
             ErrorResponseModel getErrorResponseModel =
                     step("Получение информации о билетах", () ->
                             given()
-                                .param("origin", "123")
+                                .param("origin", BAD_PARAMETER)
                                 .param("token", token)
                             .when()
                                 .get(v1CityDirections)
@@ -98,7 +100,7 @@ public class GetCityDirectionsTest extends BaseAPITest{
 
             step("Проверка ответа", () -> {
                 assertFalse(getErrorResponseModel.isSuccess());
-                assertEquals(errorLocationCode + "123`", getErrorResponseModel.getError());
+                assertEquals(errorLocationCode + BAD_PARAMETER +"`", getErrorResponseModel.getError());
             });
         }
     }

@@ -27,6 +27,9 @@ import static specs.GenericErrorSpec.getGenericErrorSpec;
 import static specs.PlacesMatrixSpec.getPlacesMatrix200ResponseSpec;
 
 public class GetPlacesMatrixTest extends BaseAPITest{
+    private final String BAD_LOCATION = "zzz";
+    private final String BAD_FLEX = "d";
+    private final String BAD_DIST = ".d";
     @ParameterizedTest
     @CsvSource({
             "RUB, MOW, LED",
@@ -125,7 +128,7 @@ public class GetPlacesMatrixTest extends BaseAPITest{
         ErrorResponseModel getErrorResponseModel =
                 step("Запрос на получение информации о пользователе", () ->
                         given()
-                                .param("origin", "zzz")
+                                .param("origin", BAD_LOCATION)
                                 .param("destination", "LED")
                                 .param("distance", 1000)
                                 .param("flexibility", 7)
@@ -152,7 +155,7 @@ public class GetPlacesMatrixTest extends BaseAPITest{
                 step("Запрос на получение информации о пользователе", () ->
                         given()
                                 .param("origin", "LED")
-                                .param("destination", "zzz")
+                                .param("destination", BAD_LOCATION)
                                 .param("distance", 1000)
                                 .param("flexibility", 7)
                                 .param("limit", 3)
@@ -179,7 +182,7 @@ public class GetPlacesMatrixTest extends BaseAPITest{
                                 .param("origin", "LED")
                                 .param("destination", "KGD")
                                 .param("distance", 1000)
-                                .param("flexibility", "d")
+                                .param("flexibility", BAD_FLEX)
                                 .param("limit", 3)
                                 .param("token", token)
                                 .when()
@@ -221,14 +224,14 @@ public class GetPlacesMatrixTest extends BaseAPITest{
     }
     @Test
     @Tag("Regress")
-    @DisplayName("Получение ошибки при неправильном формате параметра flexibility")
+    @DisplayName("Получение ошибки при неправильном формате параметра distance")
     void getBadDistanceTest() {
         ErrorResponseModel getErrorResponseModel =
                 step("Запрос на получение информации о пользователе", () ->
                         given()
                                 .param("origin", "LED")
                                 .param("destination", "KGD")
-                                .param("distance", ".f")
+                                .param("distance", BAD_DIST)
                                 .param("limit", 3)
                                 .param("token", token)
                                 .when()
@@ -278,7 +281,7 @@ public class GetPlacesMatrixTest extends BaseAPITest{
                         given()
                                 .param("origin", "LED")
                                 .param("destination", "KGD")
-                                .param("distance", "1001")
+                                .param("distance", 1001)
                                 .param("limit", 3)
                                 .param("token", token)
                                 .when()

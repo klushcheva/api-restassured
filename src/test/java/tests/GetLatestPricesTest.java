@@ -21,6 +21,12 @@ import static specs.FlightMatrixSpec.getFlightMatrix200ResponseSpec;
 import static specs.GenericErrorSpec.getGenericErrorSpec;
 
 public class GetLatestPricesTest extends BaseAPITest {
+    private final String BAD_NUM = "34663134";
+    private final String BAD_STR = "...";
+    private final Integer BAD_CLASS = 9;
+    private final String BAG_PAGE = "999";
+
+
     @ParameterizedTest
     @CsvSource({
             "0, MOW, price",
@@ -116,7 +122,7 @@ public class GetLatestPricesTest extends BaseAPITest {
                                 .param("currency", "RUB")
                                 .param("origin", "MOW")
                                 .param("period_type", "year")
-                                .param("beginning_of_period", "4283748")
+                                .param("beginning_of_period", BAD_NUM)
                                 .param("token", token)
                                 .when()
                                 .get(v3GetPrices)
@@ -142,7 +148,7 @@ public class GetLatestPricesTest extends BaseAPITest {
                                 .param("origin", "MOW")
                                 .param("period_type", "year")
                                 .param("beginning_of_period", "2024")
-                                .param("sorting", "0000")
+                                .param("sorting", BAD_NUM)
                                 .param("token", token)
                         .when()
                                 .get(v3GetPrices)
@@ -165,7 +171,7 @@ public class GetLatestPricesTest extends BaseAPITest {
                         given()
                                 .param("currency", "RUB")
                                 .param("origin", "MOW")
-                                .param("period_type", "...")
+                                .param("period_type", BAD_STR)
                                 .param("beginning_of_period", "2024")
                                 .param("token", token)
                         .when()
@@ -189,7 +195,7 @@ public class GetLatestPricesTest extends BaseAPITest {
                         given()
                                 .param("currency", "RUB")
                                 .param("origin", "MOW")
-                                .param("trip_class", 9)
+                                .param("trip_class", BAD_CLASS)
                                 .param("period_type", "year")
                                 .param("beginning_of_period", "2024")
                                 .param("token", token)
@@ -215,7 +221,7 @@ public class GetLatestPricesTest extends BaseAPITest {
                         given()
                                 .param("currency", "RUB")
                                 .param("origin", "MOW")
-                                .param("page", "xyz")
+                                .param("page", BAD_STR)
                                 .param("period_type", "year")
                                 .param("beginning_of_period", "2024")
                                 .param("token", token)
@@ -240,7 +246,7 @@ public class GetLatestPricesTest extends BaseAPITest {
                         given()
                                 .param("currency", "RUB")
                                 .param("origin", "MOW")
-                                .param("page", "999")
+                                .param("page", BAG_PAGE)
                                 .param("period_type", "year")
                                 .param("beginning_of_period", "2024")
                                 .param("token", token)
